@@ -1,1 +1,384 @@
 # Sorry-My-dear-wife
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Teena Ji — A Special Gift From The Heart ✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #120a10;
+      --rose-gold: #f4b4b8;
+      --gold-accent: #f7d28c;
+      --deep-crimson: #5c182a;
+      --card-bg: rgba(36, 17, 28, 0.72);
+      --card-border: rgba(244, 180, 184, 0.22);
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(138, 43, 76, 0.35) 0%, transparent 60%),
+        radial-gradient(circle at 10% 80%, rgba(92, 24, 42, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 90% 70%, rgba(186, 114, 137, 0.25) 0%, transparent 55%),
+        linear-gradient(180deg, #120a10 0%, #1a0b16 50%, #10060e 100%);
+      color: #fcecef;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      user-select: none;
+    }
+
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .font-hand { font-family: 'Caveat', cursive; }
+    .font-serif-luxury { font-family: 'Playfair Display', serif; }
+
+    /* Canvas floating elements */
+    #fxCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Gift 3D Animation styles */
+    .gift-scene {
+      perspective: 1000px;
+    }
+
+    .gift-box-wrapper {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .gift-box-wrapper:hover {
+      transform: scale(1.04) rotate(0.5deg);
+    }
+
+    .gift-lid {
+      transform-origin: top center;
+      transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .gift-opened .gift-lid {
+      transform: translateY(-90px) rotate(-22deg) scale(0.9);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .gift-opened .box-sparkle-core {
+      animation: coreGlow 1.8s infinite alternate;
+    }
+
+    @keyframes coreGlow {
+      from { box-shadow: 0 0 30px #f7d28c, 0 0 70px rgba(244, 180, 184, 0.7); }
+      to { box-shadow: 0 0 60px #f4b4b8, 0 0 120px rgba(247, 210, 140, 0.9); }
+    }
+
+    /* Teddy Bear Interactive Animations */
+    .bear-head {
+      transform-origin: bottom center;
+      animation: bearTilt 3s ease-in-out infinite alternate;
+    }
+    @keyframes bearTilt {
+      0% { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    .bear-arm-left {
+      transform-origin: top right;
+      transition: transform 0.3s ease;
+    }
+    .bear-arm-right {
+      transform-origin: top left;
+      transition: transform 0.3s ease;
+    }
+    .bear-hug .bear-arm-left {
+      transform: rotate(45deg) translate(8px, 4px);
+    }
+    .bear-hug .bear-arm-right {
+      transform: rotate(-45deg) translate(-8px, 4px);
+    }
+
+    /* Floating Heart Tap Effect */
+    .tap-pop-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      animation: popFloat 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+      z-index: 9999;
+    }
+    @keyframes popFloat {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.4) rotate(0deg); }
+      50% { transform: translate(-50%, -100px) scale(1.3) rotate(15deg); }
+      100% { opacity: 0; transform: translate(-50%, -160px) scale(1) rotate(-10deg); }
+    }
+
+    /* Shimmering Button */
+    .btn-magic {
+      background: linear-gradient(135deg, #f7d28c 0%, #f4b4b8 50%, #e88d9a 100%);
+      color: #380716;
+      box-shadow: 0 10px 25px rgba(244, 180, 184, 0.35);
+      transition: all 0.3s ease;
+    }
+    .btn-magic:hover {
+      box-shadow: 0 12px 35px rgba(247, 210, 140, 0.55);
+      transform: translateY(-2px);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #140810;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #732238;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f4b4b8;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-slate-100 antialiased overflow-x-hidden">
+
+  <!-- Interactive FX Canvas for Petals & Fairy Dust -->
+  <canvas id="fxCanvas"></canvas>
+
+  <!-- Sound Toggle & Quick Smiles Fixed Bar -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <button id="musicToggleBtn" onclick="toggleAudio()" class="px-4 py-2 rounded-full bg-black/40 border border-pink-400/30 backdrop-blur-md text-xs sm:text-sm font-medium text-pink-200 hover:text-white hover:border-pink-300 transition flex items-center gap-2 shadow-lg">
+      <i id="musicIcon" class="fa-solid fa-music"></i>
+      <span id="musicText">Soft Piano : Off</span>
+    </button>
+  </div>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col items-center">
+    
+    <!-- Hero Header -->
+    <header class="text-center mb-8 sm:mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-400/20 text-pink-300 text-xs tracking-widest uppercase mb-4 shadow-sm animate-pulse">
+        <span>✨ A Heartfelt World Made Just For You</span>
+      </div>
+      
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif-luxury font-bold tracking-tight text-white drop-shadow-md">
+        Teena Ji, <span class="font-script text-5xl sm:text-7xl md:text-8xl text-pink-300 font-normal block sm:inline">Meri Jaan</span>
+      </h1>
+      
+      <p class="mt-4 max-w-xl mx-auto text-pink-200/80 text-sm sm:text-base font-light leading-relaxed">
+        I know maine aapki aankhon mein aansu diye aur aapko bohot hurt kiya... Par please, apne is gunehgaar ka ye chota sa digital gift accept kijiye jo bas aapke chehre par wahi pyari si muskurahat dekhne ke liye banaya hai.
+      </p>
+    </header>
+
+    <!-- INTERACTIVE SECTION 1: THE MAGIC GIFT BOX -->
+    <section class="w-full mb-16 flex flex-col items-center">
+      
+      <div id="giftSectionBox" class="gift-box-wrapper w-full max-w-sm sm:max-w-md relative flex flex-col items-center" onclick="openMagicGift()">
+        
+        <!-- Instruction Tag -->
+        <div id="boxHint" class="mb-4 bg-pink-400/20 border border-pink-300/40 text-pink-200 px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide font-medium flex items-center gap-2 shadow-lg backdrop-blur-sm animate-bounce">
+          <span>🎁 Teena Ji, tap here to open your gift</span>
+        </div>
+
+        <!-- Visual SVG Box -->
+        <div class="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
+          
+          <!-- Glowing Aura Behind Box -->
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-pink-600/30 via-amber-400/20 to-purple-600/30 blur-2xl -z-10 animate-pulse"></div>
+
+          <!-- Base Box Graphic -->
+          <div class="w-56 h-48 sm:w-64 sm:h-52 bg-gradient-to-b from-[#6b1e35] via-[#4d1325] to-[#2e0915] rounded-2xl border-2 border-pink-300/40 shadow-2xl relative flex items-center justify-center overflow-hidden">
+            
+            <!-- Ribbon Vertical -->
+            <div class="absolute w-12 h-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 shadow-md flex items-center justify-center">
+              <div class="w-1.5 h-full bg-amber-500/40"></div>
+            </div>
+            <!-- Ribbon Horizontal -->
+            <div class="absolute w-full h-12 bg-gradient-to-b from-amber-300 via-amber-200 to-amber-400 shadow-md flex flex-col justify-center">
+              <div class="w-full h-1.5 bg-amber-500/40"></div>
+            </div>
+
+            <!-- Heart Tag Label on Box -->
+            <div class="absolute z-10 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-pink-300/50 text-[11px] sm:text-xs font-hand text-pink-100 text-center tracking-wide">
+              Priority #1: Teena Ji 🌸
+            </div>
+          </div>
+
+          <!-- Box Lid (Flies off on click) -->
+          <div id="giftLid" class="gift-lid absolute -top-4 w-60 h-16 sm:w-68 sm:h-18 bg-gradient-to-b from-[#8f2846] to-[#591428] rounded-t-2xl border-2 border-pink-200/50 shadow-2xl flex items-center justify-center z-20">
+            <!-- Ribbon on Lid -->
+            <div class="w-14 h-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 shadow-inner"></div>
+            <!-- Ribbon Bow 3D SVG -->
+            <div class="absolute -top-7 text-amber-300 text-4xl filter drop-shadow">
+              <i class="fa-solid fa-ribbon"></i>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- REVEALED GIFTS CONTAINER (Appears when opened) -->
+      <div id="revealedGifts" class="hidden w-full transition-all duration-1000 opacity-0 scale-95 mt-6">
+        
+        <div class="text-center mb-8">
+          <span class="text-3xl">✨🌸✨</span>
+          <h2 class="text-2xl sm:text-3xl font-serif-luxury font-bold text-pink-100 mt-2">
+            The Box Unfolded 4 Gifts For Teena Ji
+          </h2>
+          <p class="text-pink-300/80 text-xs sm:text-sm mt-1">Har ek gift aapke dukh ko kam karne aur mere sachi maafi ko prove karne ke liye hai</p>
+        </div>
+
+        <!-- 4 Interactive Gift Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+
+          <!-- GIFT 1: Forgiveness Bear Hug -->
+          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
+            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-amber-300/80 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-300/20">Gift #1</div>
+            
+            <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+              <span>🧸</span> The Warm Forgiveness Hug
+            </h3>
+            <p class="text-xs text-pink-200/70 mb-4">Click the teddy to get the tightest, warmest virtual hug!</p>
+
+            <!-- Interactive Teddy SVG -->
+            <div id="teddyContainer" onclick="hugTeddy()" class="cursor-pointer relative w-36 h-36 flex items-center justify-center p-2 rounded-2xl bg-pink-950/30 border border-pink-400/10 hover:scale-105 transition">
+              <svg viewBox="0 0 120 120" class="w-full h-full filter drop-shadow-md">
+                <!-- Ears -->
+                <circle cx="35" cy="30" r="14" fill="#a46d51"/>
+                <circle cx="35" cy="30" r="8" fill="#e2a688"/>
+                <circle cx="85" cy="30" r="14" fill="#a46d51"/>
+                <circle cx="85" cy="30" r="8" fill="#e2a688"/>
+                
+                <!-- Body -->
+                <ellipse cx="60" cy="78" rx="30" ry="26" fill="#a46d51"/>
+                <ellipse cx="60" cy="80" rx="20" ry="17" fill="#c78c6e"/>
+                
+                <!-- Head -->
+                <circle id="bearHead" cx="60" cy="50" r="26" fill="#b87a5a" class="bear-head"/>
+                <!-- Snout -->
+                <ellipse cx="60" cy="56" rx="13" ry="9" fill="#f1caa9"/>
+                <ellipse cx="60" cy="53" rx="5" ry="3.5" fill="#381d11"/>
+                <!-- Eyes (Gentle Sad to Hopeful) -->
+                <circle id="eyeL" cx="50" cy="46" r="3.5" fill="#23130c"/>
+                <circle id="eyeR" cx="70" cy="46" r="3.5" fill="#23130c"/>
+                <!-- Cute light sparkle in eyes -->
+                <circle cx="51" cy="45" r="1.2" fill="#ffffff"/>
+                <circle cx="71" cy="45" r="1.2" fill="#ffffff"/>
+                <!-- Gentle apologetic mouth -->
+                <path id="bearMouth" d="M 57 60 Q 60 58 63 60" stroke="#381d11" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                
+                <!-- Cheeks Blush -->
+                <circle cx="45" cy="54" r="4.5" fill="#ff708f" opacity="0.5"/>
+                <circle cx="75" cy="54" r="4.5" fill="#ff708f" opacity="0.5"/>
+                
+                <!-- Arms holding Heart -->
+                <path id="bearArmL" class="bear-arm-left" d="M 34 68 Q 45 74 54 78" stroke="#a46d51" stroke-width="9" stroke-linecap="round" fill="none"/>
+                <path id="bearArmR" class="bear-arm-right" d="M 86 68 Q 75 74 66 78" stroke="#a46d51" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+                <!-- Red/Pink Heart in Paws -->
+                <path d="M 60 82 C 54 74, 46 76, 46 84 C 46 91, 56 97, 60 101 C 64 97, 74 91, 74 84 C 74 76, 66 74, 60 82 Z" fill="#e63946" stroke="#fff" stroke-width="1.5"/>
+                <text x="60" y="89" font-size="5" text-anchor="middle" fill="#fff" font-weight="bold" font-family="sans-serif">Teena</text>
+              </svg>
+            </div>
+
+            <!-- Teddy Message popup -->
+            <div id="teddyStatus" class="mt-4 text-xs font-hand text-pink-200 text-base h-6">
+              "Pwease tap me... I'm holding all your tears away"
+            </div>
+
+            <button onclick="hugTeddy()" class="mt-3 px-4 py-1.5 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-400/30 text-pink-200 text-xs font-semibold tracking-wide transition flex items-center gap-1.5">
+              <i class="fa-solid fa-heart text-pink-400"></i> Tap For Soft Cuddle
+            </button>
+          </div>
+
+          <!-- GIFT 2: The Unfolding Letter Modal trigger -->
+          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
+            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-pink-300 bg-pink-400/10 px-2.5 py-1 rounded-full border border-pink-300/20">Gift #2</div>
+
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
+                <span>💌</span> Unfold My Heartfelt Letter
+              </h3>
+              <p class="text-xs text-pink-200/70 mb-4">No excuses, no comparisons. Sirf dil se nikli sacchi maafi.</p>
+            </div>
+
+            <!-- Animated Envelope Graphic -->
+            <div onclick="openLetterModal()" class="cursor-pointer relative w-36 h-28 my-2 rounded-xl bg-gradient-to-br from-[#8a2542] to-[#451221] border border-pink-300/40 flex items-center justify-center shadow-lg group-hover:scale-105 transition transform">
+              <div class="w-12 h-12 rounded-full bg-amber-300/20 border border-amber-300/50 flex items-center justify-center text-amber-200 text-xl shadow">
+                <i class="fa-solid fa-envelope-open-text"></i>
+              </div>
+              <span class="absolute bottom-2 text-[11px] font-hand text-pink-200">Tap to Read</span>
+            </div>
+
+            <button onclick="openLetterModal()" class="btn-magic w-full py-2.5 rounded-2xl text-xs font-bold tracking-wider uppercase transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-book-open"></i> Read Every Word
+            </button>
+          </div>
+
+          <!-- GIFT 3: Reasons You Are Priority #1 (Interactive Cards) -->
+          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
+            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-emerald-300 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-300/20">Gift #3</div>
+
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
+                <span>🌸</span> Why You're My Priority #1
+              </h3>
+              <p class="text-xs text-pink-200/70 mb-3">Card par click karke dekhiye aap mere liye kitni anmol hain</p>
+            </div>
+
+            <!-- Flipped / Cycling Reason Card -->
+            <div onclick="nextReasonCard()" id="reasonCardBox" class="cursor-pointer w-full min-h-[110px] bg-pink-900/30 border border-pink-400/20 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner transition duration-300 hover:bg-pink-900/40">
+              <span id="reasonNumber" class="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1">Reason 1 of 5</span>
+              <p id="reasonText" class="text-xs sm:text-sm font-hand text-pink-100 text-lg leading-snug">
+                "Aapki ek muskaan mere poore din ki thakan aur pareshani mita deti hai. Aap sirf partner nahi, meri shanti hain."
+              </p>
+              <span class="text-[10px] text-pink-400/60 mt-2">Tap for next sweet truth ➜</span>
+            </div>
+
+            <button onclick="nextReasonCard()" class="mt-3 px-5 py-2 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-400/30 text-pink-200 text-xs font-semibold tracking-wide transition flex items-center gap-1.5">
+              <span>Next Card</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+
+          <!-- GIFT 4: The Endless Pampering Voucher -->
+          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
+            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-purple-300 bg-purple-400/10 px-2.5 py-1 rounded-full border border-purple-300/20">Gift #4</div>
+
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
+                <span>☕</span> Teena Ji's Royal Lifetime Pass
+              </h3>
+              <p class="text-xs text-pink-200/70 mb-3">Ye official coupon redeemable hai kabhi bhi, kitni bhi baar!</p>
+            </div>
+
+            <!-- Stylized Coupon Ticket -->
+            <div class="w-full bg-gradient-to-r from-amber-200/10 via-pink-300/15 to-amber-200/10 border-2 border-dashed border-amber-300/40 rounded-2xl p-4 text-left relative">
+              <div class="flex justify-between items-center border-b border-amber-300/20 pb-2 mb-2">
+                <span class="text-[11px] font-bold tracking-wider text-amber-200 uppercase">Golden Voucher #001</span>
+                <span class="text-[10px] bg-amber-400/20 text-amber-200 px-2 py-0.5 rounded-full">Non-Expiring</span>
+              </div>
+              <ul class="text-[11px] sm:text-xs text-pink-100/90 space-y-1.5 list-disc list-inside font-light">
+                <li><strong class="text-amber-200 font-medium">Unlimited Chai & Fav Treats</strong> on demand.</li>
+                <li><strong class="text-amber-200 font-medium">100% Patient Listening</strong> bina kisi argument ke.</li>
+                <li><strong class="text-amber-200 font-medium">Teena Ji Chosen 1st</strong> har din, har pal.</li>
+              </ul>
+            </div>
+
+            <button onclick="claimVoucher(this)" class="mt-3 px-5 py-2 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-amber-200 text-xs font-semibold tracking-wide transition flex items-center gap-2">
+              <i class="fa-solid fa-stamp"></i> Claim My Forever Rights
+            </button>
+          </div>
+
+       
