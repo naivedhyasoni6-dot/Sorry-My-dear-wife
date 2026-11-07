@@ -8,17 +8,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
       --bg-dark: #0f1118;
-      --card-bg: rgba(26, 30, 43, 0.75);
-      --card-border: rgba(243, 198, 119, 0.2);
+      --card-bg: rgba(26, 30, 43, 0.85);
+      --card-border: rgba(243, 198, 119, 0.25);
       --gold: #f3c677;
       --gold-hover: #e5b35c;
       --rose: #f28b9f;
-      --rose-soft: rgba(242, 139, 159, 0.12);
+      --rose-soft: rgba(242, 139, 159, 0.15);
       --text: #f5f5f7;
       --text-muted: #abb1c0;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -45,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* Ambient Floating Sparkles */
     .sparkle-canvas {
       position: fixed;
       top: 0;
@@ -62,40 +60,36 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 28px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       padding: 3rem 2rem;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
       position: relative;
-      z-index: 1;
+      z-index: 2;
       text-align: center;
     }
 
-    /* Top Audio Controller */
     .audio-pill {
       position: absolute;
       top: 1.2rem;
       right: 1.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 0.35rem 0.85rem;
       border-radius: 20px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--gold);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.3s;
-    }
-    .audio-pill:hover {
-      background: rgba(243, 198, 119, 0.15);
+      user-select: none;
+      z-index: 10;
     }
 
-    /* Stage 1: Gift Presentation */
     .gift-stage {
       display: block;
-      animation: fadeIn 0.8s ease;
+      transition: opacity 0.4s ease;
     }
 
     .subtitle {
@@ -109,32 +103,34 @@
 
     .title {
       font-family: var(--font-serif);
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
       color: #ffffff;
+      line-height: 1.2;
     }
 
     .desc {
       color: var(--text-muted);
-      font-size: 0.96rem;
-      margin-bottom: 2.2rem;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
       line-height: 1.6;
     }
 
-    /* 3D Animated Gift Box */
+    /* Interactive Box */
     .box-container {
       width: 140px;
       height: 140px;
       margin: 1.5rem auto 2.5rem;
       position: relative;
       cursor: pointer;
+      user-select: none;
       animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     .gift-box-base {
@@ -173,7 +169,8 @@
       top: 18px;
       left: -2px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.5s ease;
+      z-index: 5;
     }
 
     .gift-bow {
@@ -200,7 +197,7 @@
       background: linear-gradient(135deg, var(--gold), var(--gold-hover));
       color: #14161f;
       border: none;
-      padding: 0.9rem 2.4rem;
+      padding: 0.95rem 2.5rem;
       border-radius: 50px;
       font-size: 1rem;
       font-weight: 700;
@@ -212,10 +209,10 @@
 
     .open-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(243, 198, 119, 0.45);
+      box-shadow: 0 14px 30px rgba(243, 198, 119, 0.5);
     }
 
-    /* Stage 2: Dashboard Content */
+    /* Unboxed Stage */
     .unboxed-stage {
       display: none;
       opacity: 0;
@@ -237,7 +234,7 @@
 
     .unboxed-stage h2 {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       color: #fff;
       line-height: 1.2;
       margin-bottom: 0.4rem;
@@ -249,7 +246,6 @@
       margin-bottom: 2rem;
     }
 
-    /* 4 Interactive Gifts Grid */
     .gifts-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -259,22 +255,22 @@
 
     .gift-card {
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
-      padding: 1.25rem 1rem;
+      padding: 1.2rem 1rem;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .gift-card:hover {
-      background: rgba(243, 198, 119, 0.08);
+      background: rgba(243, 198, 119, 0.1);
       border-color: rgba(243, 198, 119, 0.4);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
 
     .gift-card .icon {
-      font-size: 2rem;
+      font-size: 2.1rem;
       margin-bottom: 0.5rem;
       display: block;
     }
@@ -286,17 +282,17 @@
     }
 
     .gift-card p {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    /* Gussa Meter Section */
+    /* Gussa Meter */
     .anger-slider-box {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .slider-header {
@@ -320,7 +316,7 @@
     input[type=range] {
       width: 100%;
       height: 6px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       outline: none;
       -webkit-appearance: none;
@@ -341,19 +337,19 @@
       font-family: var(--font-hand);
       font-size: 1.35rem;
       color: var(--rose);
-      min-height: 40px;
+      min-height: 42px;
     }
 
-    /* Modals for Gifts */
+    /* Modals */
     .modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(8, 10, 15, 0.85);
+      background: rgba(8, 10, 15, 0.88);
       backdrop-filter: blur(8px);
-      z-index: 99;
+      z-index: 100;
       display: none;
       justify-content: center;
       align-items: center;
@@ -361,21 +357,16 @@
     }
 
     .modal-content {
-      max-width: 540px;
+      max-width: 520px;
       width: 100%;
       background: #171b26;
       border: 1px solid var(--gold);
       border-radius: 22px;
       padding: 2.2rem;
       position: relative;
-      animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       max-height: 85vh;
       overflow-y: auto;
-    }
-
-    @keyframes modalPop {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      text-align: left;
     }
 
     .modal-close {
@@ -385,13 +376,13 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       cursor: pointer;
     }
 
     .modal-content h3 {
       font-family: var(--font-serif);
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       color: var(--gold);
       margin-bottom: 1rem;
     }
@@ -400,7 +391,6 @@
       font-size: 0.95rem;
       color: #d1d5db;
       line-height: 1.7;
-      text-align: left;
     }
 
     .letter-body p {
@@ -412,20 +402,20 @@
       border-radius: 14px;
       padding: 1.5rem;
       text-align: center;
-      background: rgba(243, 198, 119, 0.05);
+      background: rgba(243, 198, 119, 0.06);
       margin-top: 1rem;
     }
 
     .coupon-card h4 {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: #fff;
       margin-bottom: 0.3rem;
     }
 
     @media (max-width: 580px) {
-      .main-wrapper { padding: 2.2rem 1.4rem; }
+      .main-wrapper { padding: 2rem 1.2rem; }
       .gifts-grid { grid-template-columns: 1fr; }
-      .title { font-size: 2rem; }
+      .title { font-size: 1.9rem; }
     }
   </style>
 </head>
@@ -434,12 +424,11 @@
   <canvas class="sparkle-canvas" id="canvas"></canvas>
 
   <div class="main-wrapper">
-    <!-- Ambient Melodic Audio Trigger -->
-    <div class="audio-pill" onclick="toggleAudio()" id="audioBtn">
+    <div class="audio-pill" id="audioBtn">
       <span id="audioIcon">🎵</span> <span id="audioLabel">Play Soft Tune</span>
     </div>
 
-    <!-- STAGE 1: CLOSED GIFT -->
+    <!-- STAGE 1: CLOSED BOX -->
     <div class="gift-stage" id="stage1">
       <div class="subtitle">For Teena Ji</div>
       <h1 class="title">I Am Truly Sorry, Meri Jaan</h1>
@@ -447,7 +436,7 @@
         Maine aapse theek se baat nahi ki aur aapka dil dukhaya. Ye virtual gift meri sincere maafi aur aapko khush dekhne ki ek choti si koshish hai.
       </p>
 
-      <div class="box-container" onclick="openGift()">
+      <div class="box-container" id="boxClickable">
         <div class="gift-box-base">
           <div class="gift-ribbon-v"></div>
           <div class="gift-ribbon-h"></div>
@@ -458,51 +447,50 @@
         </div>
       </div>
 
-      <button class="open-btn" onclick="openGift()">OPEN YOUR GIFT 🎁</button>
+      <button class="open-btn" id="openBtn">OPEN YOUR GIFT 🎁</button>
     </div>
 
     <!-- STAGE 2: UNBOXED DASHBOARD -->
     <div class="unboxed-stage" id="stage2">
       <div class="greet-badge">Apology & Comfort Pack</div>
       <h2>For Teena Ji — Meri Jaan</h2>
-      <p class="unboxed-sub">Aapki narazgi 100% justified hai. Ye 4 chote gifts bas aapke honton par wapas muskan laane ke liye hain:</p>
+      <p class="unboxed-sub">Aapki narazgi 100% justified hai. Ye 4 chote gifts bas aapke chehre par wapas sukoon laane ke liye hain:</p>
 
-      <!-- 4 Gifts Grid -->
       <div class="gifts-grid">
-        <div class="gift-card" onclick="openModal('modalTeddy')">
+        <div class="gift-card" id="cardTeddy">
           <span class="icon">🧸</span>
           <h4>The Forgiveness Bear</h4>
           <p>Tap karein ek pyare virtual hug ke liye</p>
         </div>
 
-        <div class="gift-card" onclick="openModal('modalLetter')">
+        <div class="gift-card" id="cardLetter">
           <span class="icon">💌</span>
           <h4>Heartfelt Apology Letter</h4>
           <p>Bina kisi excuse ke meri sachai padhein</p>
         </div>
 
-        <div class="gift-card" onclick="openModal('modalPriority')">
+        <div class="gift-card" id="cardPriority">
           <span class="icon">🌸</span>
           <h4>Priority Cards</h4>
           <p>Kyun aap mere liye hamesha #1 hain</p>
         </div>
 
-        <div class="gift-card" onclick="openModal('modalCoupon')">
+        <div class="gift-card" id="cardCoupon">
           <span class="icon">🎟️</span>
           <h4>Lifetime Peace Pass</h4>
           <p>Aapka unconditional pampering ticket</p>
         </div>
       </div>
 
-      <!-- Interactive Gussa Meter -->
+      <!-- Gussa Meter -->
       <div class="anger-slider-box">
         <div class="slider-header">
           <span>Aapka Gussa Meter 💔</span>
           <span class="slider-level" id="sliderVal">100%</span>
         </div>
-        <input type="range" id="angerRange" min="0" max="100" value="100" oninput="updateGussa(this.value)">
+        <input type="range" id="angerRange" min="0" max="100" value="100">
         <div class="reaction-text" id="reactionMsg">
-          "Aapka 100% gussa hona bilkul sahi hai... Main tab tak wait karunga jab tak aap normal feel na karein."
+          "Aapka 100% naraz hona bilkul sahi hai... Main tab tak wait karunga jab tak aap normal feel na karein."
         </div>
       </div>
 
@@ -512,23 +500,22 @@
     </div>
   </div>
 
-  <!-- MODAL: TEDDY HUG -->
+  <!-- MODALS -->
   <div class="modal-backdrop" id="modalTeddy">
     <div class="modal-content" style="text-align:center;">
-      <button class="modal-close" onclick="closeModal('modalTeddy')">&times;</button>
+      <button class="modal-close" data-close="modalTeddy">&times;</button>
       <div style="font-size: 4.5rem; margin-bottom: 0.5rem;" id="bearEmoji">🧸</div>
       <h3>Warmest Hug For You</h3>
       <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        "I know mere galti se aapke aansu aaye hain. Agar main wahan hota toh bas bina bole aapko gale laga leta jab tak aap theek mehsoos na karti."
+        "I know meri laparwahi se aapke aansu aaye hain. Agar main wahan hota toh bas bina kuch bole aapko gale laga leta jab tak aapka mann shant na ho jata."
       </p>
-      <button class="open-btn" style="padding: 0.7rem 1.8rem;" onclick="squeezeBear()">Squeeze Bear 🤗</button>
+      <button class="open-btn" style="padding: 0.7rem 1.8rem;" id="squeezeBearBtn">Squeeze Bear 🤗</button>
     </div>
   </div>
 
-  <!-- MODAL: HEARTFELT LETTER -->
   <div class="modal-backdrop" id="modalLetter">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('modalLetter')">&times;</button>
+      <button class="modal-close" data-close="modalLetter">&times;</button>
       <h3>Teena Ji, Meri Jaan...</h3>
       <div class="letter-body">
         <p>Main koi bahana nahi banaunga. Chaar baar aapko second choice feel karwana meri taraf se ek bahut badi na-samjhi aur laparwahi thi.</p>
@@ -538,28 +525,26 @@
     </div>
   </div>
 
-  <!-- MODAL: PRIORITY CARDS -->
   <div class="modal-backdrop" id="modalPriority">
     <div class="modal-content" style="text-align: center;">
-      <button class="modal-close" onclick="closeModal('modalPriority')">&times;</button>
+      <button class="modal-close" data-close="modalPriority">&times;</button>
       <h3>Why You Are Priority #1</h3>
-      <div id="priorityCardContent" style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; margin: 1.2rem 0; font-size: 1.05rem; color: var(--gold);">
+      <div id="priorityCardContent" style="padding: 1.5rem; background: rgba(255,255,255,0.04); border-radius: 12px; margin: 1.2rem 0; font-size: 1.05rem; color: var(--gold);">
         "Aapki ek smile mere poore din ka sukoon hai, aur aapko rulaana meri sabse badi haar."
       </div>
-      <button class="open-btn" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;" onclick="cyclePriority()">Next Reason 💖</button>
+      <button class="open-btn" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;" id="nextPriorityBtn">Next Reason 💖</button>
     </div>
   </div>
 
-  <!-- MODAL: COUPON -->
   <div class="modal-backdrop" id="modalCoupon">
     <div class="modal-content" style="text-align: center;">
-      <button class="modal-close" onclick="closeModal('modalCoupon')">&times;</button>
+      <button class="modal-close" data-close="modalCoupon">&times;</button>
       <h3>A Special Peace Treaty</h3>
       <div class="coupon-card">
         <h4>ROYAL PAMPERING TICKET 🎟️</h4>
         <p style="font-size: 0.9rem; color: var(--gold); margin: 0.6rem 0;">Valid For: Teena Ji</p>
-        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
-          • Unlimited listening without interruptions<br>
+        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;">
+          • Unlimited listening without any interruptions<br>
           • 100% priority in all phone calls & chats<br>
           • No expiry date — Redeemable whenever you're ready
         </p>
@@ -571,51 +556,100 @@
   </div>
 
   <script>
-    /* Unboxing Animation */
-    function openGift() {
-      const lid = document.getElementById('giftLid');
-      lid.style.transform = "translateY(-45px) rotate(-18deg)";
-      
-      triggerConfetti();
-      playSoftTune();
+    // Pure Vanilla Confetti (Zero External CDN Dependency)
+    function launchConfetti() {
+      const colors = ['#f3c677', '#f28b9f', '#ffffff', '#e56586'];
+      for (let i = 0; i < 60; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = (window.innerHeight * 0.6) + 'px';
+        particle.style.width = (Math.random() * 8 + 6) + 'px';
+        particle.style.height = (Math.random() * 8 + 6) + 'px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        particle.style.zIndex = '999';
+        particle.style.pointerEvents = 'none';
+        particle.style.transition = 'all 1.4s cubic-bezier(0.25, 1, 0.5, 1)';
+        document.body.appendChild(particle);
 
-      setTimeout(() => {
-        document.getElementById('stage1').style.display = 'none';
-        const s2 = document.getElementById('stage2');
-        s2.style.display = 'block';
-        setTimeout(() => { s2.style.opacity = '1'; }, 50);
-      }, 700);
-    }
+        const destX = (Math.random() - 0.5) * 400;
+        const destY = -Math.random() * 350 - 50;
 
-    /* Confetti Particle Burst */
-    function triggerConfetti() {
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 70,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#f3c677', '#f28b9f', '#ffffff']
+        requestAnimationFrame(() => {
+          particle.style.transform = `translate(${destX}px, ${destY}px) rotate(${Math.random() * 720}deg)`;
+          particle.style.opacity = '0';
         });
+
+        setTimeout(() => particle.remove(), 1500);
       }
     }
 
-    /* Modal Navigation */
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+    // Unboxing Action
+    let opened = false;
+    function openGift() {
+      if (opened) return;
+      opened = true;
+
+      const lid = document.getElementById('giftLid');
+      if (lid) lid.style.transform = "translateY(-50px) rotate(-20deg)";
+
+      launchConfetti();
+
+      // Safe Audio trigger
+      try { playSoftTune(); } catch(e) {}
+
+      setTimeout(() => {
+        const s1 = document.getElementById('stage1');
+        const s2 = document.getElementById('stage2');
+        if (s1) s1.style.display = 'none';
+        if (s2) {
+          s2.style.display = 'block';
+          setTimeout(() => { s2.style.opacity = '1'; }, 40);
+        }
+      }, 550);
     }
 
-    /* Squeeze Bear Action */
-    function squeezeBear() {
+    // Attach Event Listeners Directly
+    document.getElementById('openBtn').addEventListener('click', openGift);
+    document.getElementById('boxClickable').addEventListener('click', openGift);
+
+    // Modal Control
+    function showModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'flex';
+    }
+    function hideModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    }
+
+    document.getElementById('cardTeddy').addEventListener('click', () => showModal('modalTeddy'));
+    document.getElementById('cardLetter').addEventListener('click', () => showModal('modalLetter'));
+    document.getElementById('cardPriority').addEventListener('click', () => showModal('modalPriority'));
+    document.getElementById('cardCoupon').addEventListener('click', () => showModal('modalCoupon'));
+
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        hideModal(e.target.getAttribute('data-close'));
+      });
+    });
+
+    document.querySelectorAll('.modal-backdrop').forEach(bg => {
+      bg.addEventListener('click', (e) => {
+        if (e.target === bg) bg.style.display = 'none';
+      });
+    });
+
+    // Bear Squeeze
+    document.getElementById('squeezeBearBtn').addEventListener('click', () => {
       const bear = document.getElementById('bearEmoji');
       bear.textContent = "🥰";
-      triggerConfetti();
+      launchConfetti();
       setTimeout(() => { bear.textContent = "🧸"; }, 1500);
-    }
+    });
 
-    /* Interactive Reasons Cycling */
+    // Priority Cards Cycling
     const reasons = [
       "Aapki ek smile mere poore din ka sukoon hai, aur aapko rulaana meri sabse badi haar.",
       "Aapne hamesha mera saath diya, jabki mujhe aapko protect aur support karna chahiye tha.",
@@ -623,49 +657,15 @@
       "Aapki izzat aur aapka dhyan rakhna meri sabse pehli zimmedari hai."
     ];
     let rIdx = 0;
-    function cyclePriority() {
+    document.getElementById('nextPriorityBtn').addEventListener('click', () => {
       rIdx = (rIdx + 1) % reasons.length;
       document.getElementById('priorityCardContent').textContent = `"${reasons[rIdx]}"`;
-    }
+    });
 
-    /* Gussa Meter Responses */
-    function updateGussa(val) {
+    // Gussa Meter
+    document.getElementById('angerRange').addEventListener('input', (e) => {
+      const val = e.target.value;
       document.getElementById('sliderVal').textContent = val + "%";
       const msg = document.getElementById('reactionMsg');
       if (val > 80) {
-        msg.textContent = '"Aapka 100% naraz hona bilkul lazmi hai... Main tab tak intazar karunga jab tak aap theek na hon."';
-      } else if (val > 40) {
-        msg.textContent = '"Gussa thoda kam hua, lekin main jaanta hoon abhi bhi dil dukha hai. I am here for you."';
-      } else if (val > 0) {
-        msg.textContent = '"Ek choti si muskan bhi mere liye duniya barabar hai. Thank you for listening to me."';
-      } else {
-        msg.textContent = '"Agar 0% par aa gaye hain, toh please mujhe ek baar call karke meri awaaz sun lijiye ❤️"';
-        triggerConfetti();
-      }
-    }
-
-    /* Web Audio API Synthesizer (No external sound files required) */
-    let audioCtx = null;
-    let isPlaying = false;
-    let timer = null;
-
-    function playSoftTune() {
-      if (isPlaying) return;
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
-        isPlaying = true;
-        document.getElementById('audioLabel').textContent = "Melody Playing 🎶";
-
-        const notes = [261.63, 329.63, 392.00, 440.00, 392.00, 329.63]; // C - E - G - A - G - E
-        let i = 0;
-
-        function playNote() {
-          if (!isPlaying) return;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(notes[i % notes.length], audioCtx.currentTime);
-
-          gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-          
+        msg.textCon
