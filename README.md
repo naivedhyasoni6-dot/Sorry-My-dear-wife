@@ -1,384 +1,671 @@
-# Sorry-My-dear-wife
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Teena Ji — A Special Gift From The Heart ✨</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>For Teena Ji — With All My Heart ❤️</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --bg-dark: #120a10;
-      --rose-gold: #f4b4b8;
-      --gold-accent: #f7d28c;
-      --deep-crimson: #5c182a;
-      --card-bg: rgba(36, 17, 28, 0.72);
-      --card-border: rgba(244, 180, 184, 0.22);
+      --bg-dark: #0f1118;
+      --card-bg: rgba(26, 30, 43, 0.75);
+      --card-border: rgba(243, 198, 119, 0.2);
+      --gold: #f3c677;
+      --gold-hover: #e5b35c;
+      --rose: #f28b9f;
+      --rose-soft: rgba(242, 139, 159, 0.12);
+      --text: #f5f5f7;
+      --text-muted: #abb1c0;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-hand: 'Caveat', cursive;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 10%, rgba(138, 43, 76, 0.35) 0%, transparent 60%),
-        radial-gradient(circle at 10% 80%, rgba(92, 24, 42, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 90% 70%, rgba(186, 114, 137, 0.25) 0%, transparent 55%),
-        linear-gradient(180deg, #120a10 0%, #1a0b16 50%, #10060e 100%);
-      color: #fcecef;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 20%, #1f2538 0%, var(--bg-dark) 75%);
+      color: var(--text);
+      font-family: var(--font-sans);
       min-height: 100vh;
-      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.2rem;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .font-script { font-family: 'Great Vibes', cursive; }
-    .font-hand { font-family: 'Caveat', cursive; }
-    .font-serif-luxury { font-family: 'Playfair Display', serif; }
-
-    /* Canvas floating elements */
-    #fxCanvas {
+    /* Ambient Floating Sparkles */
+    .sparkle-canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      z-index: 2;
+      z-index: 0;
     }
 
-    /* Gift 3D Animation styles */
-    .gift-scene {
-      perspective: 1000px;
+    .main-wrapper {
+      max-width: 660px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 3rem 2rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 1;
+      text-align: center;
     }
 
-    .gift-box-wrapper {
+    /* Top Audio Controller */
+    .audio-pill {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+    .audio-pill:hover {
+      background: rgba(243, 198, 119, 0.15);
+    }
+
+    /* Stage 1: Gift Presentation */
+    .gift-stage {
+      display: block;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .title {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+
+    .desc {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      margin-bottom: 2.2rem;
+      line-height: 1.6;
+    }
+
+    /* 3D Animated Gift Box */
+    .box-container {
+      width: 140px;
+      height: 140px;
+      margin: 1.5rem auto 2.5rem;
       position: relative;
       cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: float 3s ease-in-out infinite;
     }
-    .gift-box-wrapper:hover {
-      transform: scale(1.04) rotate(0.5deg);
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .gift-box-base {
+      width: 130px;
+      height: 95px;
+      background: linear-gradient(135deg, #e56586, #b83d5e);
+      border-radius: 0 0 14px 14px;
+      position: absolute;
+      bottom: 0;
+      left: 5px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .gift-ribbon-v {
+      position: absolute;
+      width: 24px;
+      height: 100%;
+      background: var(--gold);
+      left: 53px;
+    }
+
+    .gift-ribbon-h {
+      position: absolute;
+      width: 100%;
+      height: 20px;
+      background: var(--gold);
+      top: 38px;
     }
 
     .gift-lid {
-      transform-origin: top center;
-      transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      width: 144px;
+      height: 32px;
+      background: linear-gradient(135deg, #f27999, #cc496c);
+      border-radius: 8px;
+      position: absolute;
+      top: 18px;
+      left: -2px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .gift-opened .gift-lid {
-      transform: translateY(-90px) rotate(-22deg) scale(0.9);
-      opacity: 0;
-      pointer-events: none;
+    .gift-bow {
+      position: absolute;
+      top: -14px;
+      left: 52px;
+      width: 40px;
+      height: 24px;
     }
 
-    .gift-opened .box-sparkle-core {
-      animation: coreGlow 1.8s infinite alternate;
+    .gift-bow::before, .gift-bow::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      border: 3px solid var(--gold);
+      border-radius: 50% 50% 10% 50%;
+      top: 0;
+    }
+    .gift-bow::before { left: 0; transform: rotate(-30deg); }
+    .gift-bow::after { right: 0; transform: rotate(30deg) scaleX(-1); }
+
+    .open-btn {
+      background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+      color: #14161f;
+      border: none;
+      padding: 0.9rem 2.4rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(243, 198, 119, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    @keyframes coreGlow {
-      from { box-shadow: 0 0 30px #f7d28c, 0 0 70px rgba(244, 180, 184, 0.7); }
-      to { box-shadow: 0 0 60px #f4b4b8, 0 0 120px rgba(247, 210, 140, 0.9); }
-    }
-
-    /* Teddy Bear Interactive Animations */
-    .bear-head {
-      transform-origin: bottom center;
-      animation: bearTilt 3s ease-in-out infinite alternate;
-    }
-    @keyframes bearTilt {
-      0% { transform: rotate(-3deg); }
-      100% { transform: rotate(3deg); }
-    }
-
-    .bear-arm-left {
-      transform-origin: top right;
-      transition: transform 0.3s ease;
-    }
-    .bear-arm-right {
-      transform-origin: top left;
-      transition: transform 0.3s ease;
-    }
-    .bear-hug .bear-arm-left {
-      transform: rotate(45deg) translate(8px, 4px);
-    }
-    .bear-hug .bear-arm-right {
-      transform: rotate(-45deg) translate(-8px, 4px);
-    }
-
-    /* Floating Heart Tap Effect */
-    .tap-pop-heart {
-      position: fixed;
-      pointer-events: none;
-      font-size: 1.5rem;
-      animation: popFloat 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-      z-index: 9999;
-    }
-    @keyframes popFloat {
-      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.4) rotate(0deg); }
-      50% { transform: translate(-50%, -100px) scale(1.3) rotate(15deg); }
-      100% { opacity: 0; transform: translate(-50%, -160px) scale(1) rotate(-10deg); }
-    }
-
-    /* Shimmering Button */
-    .btn-magic {
-      background: linear-gradient(135deg, #f7d28c 0%, #f4b4b8 50%, #e88d9a 100%);
-      color: #380716;
-      box-shadow: 0 10px 25px rgba(244, 180, 184, 0.35);
-      transition: all 0.3s ease;
-    }
-    .btn-magic:hover {
-      box-shadow: 0 12px 35px rgba(247, 210, 140, 0.55);
+    .open-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(243, 198, 119, 0.45);
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 7px;
+    /* Stage 2: Dashboard Content */
+    .unboxed-stage {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      text-align: left;
     }
-    ::-webkit-scrollbar-track {
-      background: #140810;
+
+    .greet-badge {
+      display: inline-block;
+      background: var(--rose-soft);
+      border: 1px solid rgba(242, 139, 159, 0.3);
+      color: var(--rose);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #732238;
+
+    .unboxed-stage h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .unboxed-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    /* 4 Interactive Gifts Grid */
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .gift-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gift-card:hover {
+      background: rgba(243, 198, 119, 0.08);
+      border-color: rgba(243, 198, 119, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .gift-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .gift-card h4 {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .gift-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Gussa Meter Section */
+    .anger-slider-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .slider-header span {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .slider-level {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 10px;
+      outline: none;
+      -webkit-appearance: none;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #f4b4b8;
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(243, 198, 119, 0.7);
+    }
+
+    .reaction-text {
+      margin-top: 1rem;
+      font-family: var(--font-hand);
+      font-size: 1.35rem;
+      color: var(--rose);
+      min-height: 40px;
+    }
+
+    /* Modals for Gifts */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(8, 10, 15, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 99;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .modal-content {
+      max-width: 540px;
+      width: 100%;
+      background: #171b26;
+      border: 1px solid var(--gold);
+      border-radius: 22px;
+      padding: 2.2rem;
+      position: relative;
+      animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .letter-body {
+      font-size: 0.95rem;
+      color: #d1d5db;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .letter-body p {
+      margin-bottom: 1rem;
+    }
+
+    .coupon-card {
+      border: 2px dashed var(--gold);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(243, 198, 119, 0.05);
+      margin-top: 1rem;
+    }
+
+    .coupon-card h4 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: 580px) {
+      .main-wrapper { padding: 2.2rem 1.4rem; }
+      .gifts-grid { grid-template-columns: 1fr; }
+      .title { font-size: 2rem; }
     }
   </style>
 </head>
-<body class="relative min-h-screen text-slate-100 antialiased overflow-x-hidden">
+<body>
 
-  <!-- Interactive FX Canvas for Petals & Fairy Dust -->
-  <canvas id="fxCanvas"></canvas>
+  <canvas class="sparkle-canvas" id="canvas"></canvas>
 
-  <!-- Sound Toggle & Quick Smiles Fixed Bar -->
-  <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
-    <button id="musicToggleBtn" onclick="toggleAudio()" class="px-4 py-2 rounded-full bg-black/40 border border-pink-400/30 backdrop-blur-md text-xs sm:text-sm font-medium text-pink-200 hover:text-white hover:border-pink-300 transition flex items-center gap-2 shadow-lg">
-      <i id="musicIcon" class="fa-solid fa-music"></i>
-      <span id="musicText">Soft Piano : Off</span>
-    </button>
+  <div class="main-wrapper">
+    <!-- Ambient Melodic Audio Trigger -->
+    <div class="audio-pill" onclick="toggleAudio()" id="audioBtn">
+      <span id="audioIcon">🎵</span> <span id="audioLabel">Play Soft Tune</span>
+    </div>
+
+    <!-- STAGE 1: CLOSED GIFT -->
+    <div class="gift-stage" id="stage1">
+      <div class="subtitle">For Teena Ji</div>
+      <h1 class="title">I Am Truly Sorry, Meri Jaan</h1>
+      <p class="desc">
+        Maine aapse theek se baat nahi ki aur aapka dil dukhaya. Ye virtual gift meri sincere maafi aur aapko khush dekhne ki ek choti si koshish hai.
+      </p>
+
+      <div class="box-container" onclick="openGift()">
+        <div class="gift-box-base">
+          <div class="gift-ribbon-v"></div>
+          <div class="gift-ribbon-h"></div>
+        </div>
+        <div class="gift-lid" id="giftLid">
+          <div class="gift-ribbon-v" style="left: 55px; height: 100%;"></div>
+          <div class="gift-bow"></div>
+        </div>
+      </div>
+
+      <button class="open-btn" onclick="openGift()">OPEN YOUR GIFT 🎁</button>
+    </div>
+
+    <!-- STAGE 2: UNBOXED DASHBOARD -->
+    <div class="unboxed-stage" id="stage2">
+      <div class="greet-badge">Apology & Comfort Pack</div>
+      <h2>For Teena Ji — Meri Jaan</h2>
+      <p class="unboxed-sub">Aapki narazgi 100% justified hai. Ye 4 chote gifts bas aapke honton par wapas muskan laane ke liye hain:</p>
+
+      <!-- 4 Gifts Grid -->
+      <div class="gifts-grid">
+        <div class="gift-card" onclick="openModal('modalTeddy')">
+          <span class="icon">🧸</span>
+          <h4>The Forgiveness Bear</h4>
+          <p>Tap karein ek pyare virtual hug ke liye</p>
+        </div>
+
+        <div class="gift-card" onclick="openModal('modalLetter')">
+          <span class="icon">💌</span>
+          <h4>Heartfelt Apology Letter</h4>
+          <p>Bina kisi excuse ke meri sachai padhein</p>
+        </div>
+
+        <div class="gift-card" onclick="openModal('modalPriority')">
+          <span class="icon">🌸</span>
+          <h4>Priority Cards</h4>
+          <p>Kyun aap mere liye hamesha #1 hain</p>
+        </div>
+
+        <div class="gift-card" onclick="openModal('modalCoupon')">
+          <span class="icon">🎟️</span>
+          <h4>Lifetime Peace Pass</h4>
+          <p>Aapka unconditional pampering ticket</p>
+        </div>
+      </div>
+
+      <!-- Interactive Gussa Meter -->
+      <div class="anger-slider-box">
+        <div class="slider-header">
+          <span>Aapka Gussa Meter 💔</span>
+          <span class="slider-level" id="sliderVal">100%</span>
+        </div>
+        <input type="range" id="angerRange" min="0" max="100" value="100" oninput="updateGussa(this.value)">
+        <div class="reaction-text" id="reactionMsg">
+          "Aapka 100% gussa hona bilkul sahi hai... Main tab tak wait karunga jab tak aap normal feel na karein."
+        </div>
+      </div>
+
+      <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+        Take all the time you need, Teena ji. Main yahin hoon, hamesha.
+      </p>
+    </div>
   </div>
 
-  <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 flex flex-col items-center">
-    
-    <!-- Hero Header -->
-    <header class="text-center mb-8 sm:mb-12">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-400/20 text-pink-300 text-xs tracking-widest uppercase mb-4 shadow-sm animate-pulse">
-        <span>✨ A Heartfelt World Made Just For You</span>
-      </div>
-      
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif-luxury font-bold tracking-tight text-white drop-shadow-md">
-        Teena Ji, <span class="font-script text-5xl sm:text-7xl md:text-8xl text-pink-300 font-normal block sm:inline">Meri Jaan</span>
-      </h1>
-      
-      <p class="mt-4 max-w-xl mx-auto text-pink-200/80 text-sm sm:text-base font-light leading-relaxed">
-        I know maine aapki aankhon mein aansu diye aur aapko bohot hurt kiya... Par please, apne is gunehgaar ka ye chota sa digital gift accept kijiye jo bas aapke chehre par wahi pyari si muskurahat dekhne ke liye banaya hai.
+  <!-- MODAL: TEDDY HUG -->
+  <div class="modal-backdrop" id="modalTeddy">
+    <div class="modal-content" style="text-align:center;">
+      <button class="modal-close" onclick="closeModal('modalTeddy')">&times;</button>
+      <div style="font-size: 4.5rem; margin-bottom: 0.5rem;" id="bearEmoji">🧸</div>
+      <h3>Warmest Hug For You</h3>
+      <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        "I know mere galti se aapke aansu aaye hain. Agar main wahan hota toh bas bina bole aapko gale laga leta jab tak aap theek mehsoos na karti."
       </p>
-    </header>
+      <button class="open-btn" style="padding: 0.7rem 1.8rem;" onclick="squeezeBear()">Squeeze Bear 🤗</button>
+    </div>
+  </div>
 
-    <!-- INTERACTIVE SECTION 1: THE MAGIC GIFT BOX -->
-    <section class="w-full mb-16 flex flex-col items-center">
-      
-      <div id="giftSectionBox" class="gift-box-wrapper w-full max-w-sm sm:max-w-md relative flex flex-col items-center" onclick="openMagicGift()">
-        
-        <!-- Instruction Tag -->
-        <div id="boxHint" class="mb-4 bg-pink-400/20 border border-pink-300/40 text-pink-200 px-5 py-2 rounded-full text-xs sm:text-sm tracking-wide font-medium flex items-center gap-2 shadow-lg backdrop-blur-sm animate-bounce">
-          <span>🎁 Teena Ji, tap here to open your gift</span>
-        </div>
-
-        <!-- Visual SVG Box -->
-        <div class="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
-          
-          <!-- Glowing Aura Behind Box -->
-          <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-pink-600/30 via-amber-400/20 to-purple-600/30 blur-2xl -z-10 animate-pulse"></div>
-
-          <!-- Base Box Graphic -->
-          <div class="w-56 h-48 sm:w-64 sm:h-52 bg-gradient-to-b from-[#6b1e35] via-[#4d1325] to-[#2e0915] rounded-2xl border-2 border-pink-300/40 shadow-2xl relative flex items-center justify-center overflow-hidden">
-            
-            <!-- Ribbon Vertical -->
-            <div class="absolute w-12 h-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 shadow-md flex items-center justify-center">
-              <div class="w-1.5 h-full bg-amber-500/40"></div>
-            </div>
-            <!-- Ribbon Horizontal -->
-            <div class="absolute w-full h-12 bg-gradient-to-b from-amber-300 via-amber-200 to-amber-400 shadow-md flex flex-col justify-center">
-              <div class="w-full h-1.5 bg-amber-500/40"></div>
-            </div>
-
-            <!-- Heart Tag Label on Box -->
-            <div class="absolute z-10 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-pink-300/50 text-[11px] sm:text-xs font-hand text-pink-100 text-center tracking-wide">
-              Priority #1: Teena Ji 🌸
-            </div>
-          </div>
-
-          <!-- Box Lid (Flies off on click) -->
-          <div id="giftLid" class="gift-lid absolute -top-4 w-60 h-16 sm:w-68 sm:h-18 bg-gradient-to-b from-[#8f2846] to-[#591428] rounded-t-2xl border-2 border-pink-200/50 shadow-2xl flex items-center justify-center z-20">
-            <!-- Ribbon on Lid -->
-            <div class="w-14 h-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 shadow-inner"></div>
-            <!-- Ribbon Bow 3D SVG -->
-            <div class="absolute -top-7 text-amber-300 text-4xl filter drop-shadow">
-              <i class="fa-solid fa-ribbon"></i>
-            </div>
-          </div>
-
-        </div>
-
+  <!-- MODAL: HEARTFELT LETTER -->
+  <div class="modal-backdrop" id="modalLetter">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('modalLetter')">&times;</button>
+      <h3>Teena Ji, Meri Jaan...</h3>
+      <div class="letter-body">
+        <p>Main koi bahana nahi banaunga. Chaar baar aapko second choice feel karwana meri taraf se ek bahut badi na-samjhi aur laparwahi thi.</p>
+        <p>Aap meri partner hain, aapko mujhse importance ya waqt maangne ki zarurat nahi honi chahiye. Wo aapka pehla haq tha jo maine cheena. Kisi aur rishte ya situation ke peeche main apni is galti ko nahi chhipaunga.</p>
+        <p>Main aapse ye nahi keh raha ki turant sab bhool kar maaf kar dijiye. Main bas ye promise karta hoon ki aage se mere actions aapko batayenge ki aap mere liye sabse upar hain.</p>
       </div>
+    </div>
+  </div>
 
-      <!-- REVEALED GIFTS CONTAINER (Appears when opened) -->
-      <div id="revealedGifts" class="hidden w-full transition-all duration-1000 opacity-0 scale-95 mt-6">
-        
-        <div class="text-center mb-8">
-          <span class="text-3xl">✨🌸✨</span>
-          <h2 class="text-2xl sm:text-3xl font-serif-luxury font-bold text-pink-100 mt-2">
-            The Box Unfolded 4 Gifts For Teena Ji
-          </h2>
-          <p class="text-pink-300/80 text-xs sm:text-sm mt-1">Har ek gift aapke dukh ko kam karne aur mere sachi maafi ko prove karne ke liye hai</p>
-        </div>
+  <!-- MODAL: PRIORITY CARDS -->
+  <div class="modal-backdrop" id="modalPriority">
+    <div class="modal-content" style="text-align: center;">
+      <button class="modal-close" onclick="closeModal('modalPriority')">&times;</button>
+      <h3>Why You Are Priority #1</h3>
+      <div id="priorityCardContent" style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; margin: 1.2rem 0; font-size: 1.05rem; color: var(--gold);">
+        "Aapki ek smile mere poore din ka sukoon hai, aur aapko rulaana meri sabse badi haar."
+      </div>
+      <button class="open-btn" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;" onclick="cyclePriority()">Next Reason 💖</button>
+    </div>
+  </div>
 
-        <!-- 4 Interactive Gift Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+  <!-- MODAL: COUPON -->
+  <div class="modal-backdrop" id="modalCoupon">
+    <div class="modal-content" style="text-align: center;">
+      <button class="modal-close" onclick="closeModal('modalCoupon')">&times;</button>
+      <h3>A Special Peace Treaty</h3>
+      <div class="coupon-card">
+        <h4>ROYAL PAMPERING TICKET 🎟️</h4>
+        <p style="font-size: 0.9rem; color: var(--gold); margin: 0.6rem 0;">Valid For: Teena Ji</p>
+        <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+          • Unlimited listening without interruptions<br>
+          • 100% priority in all phone calls & chats<br>
+          • No expiry date — Redeemable whenever you're ready
+        </p>
+      </div>
+      <p style="margin-top: 1.2rem; font-size: 0.85rem; color: var(--text-muted);">
+        Signed from the bottom of my heart.
+      </p>
+    </div>
+  </div>
 
-          <!-- GIFT 1: Forgiveness Bear Hug -->
-          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
-            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-amber-300/80 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-300/20">Gift #1</div>
-            
-            <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
-              <span>🧸</span> The Warm Forgiveness Hug
-            </h3>
-            <p class="text-xs text-pink-200/70 mb-4">Click the teddy to get the tightest, warmest virtual hug!</p>
+  <script>
+    /* Unboxing Animation */
+    function openGift() {
+      const lid = document.getElementById('giftLid');
+      lid.style.transform = "translateY(-45px) rotate(-18deg)";
+      
+      triggerConfetti();
+      playSoftTune();
 
-            <!-- Interactive Teddy SVG -->
-            <div id="teddyContainer" onclick="hugTeddy()" class="cursor-pointer relative w-36 h-36 flex items-center justify-center p-2 rounded-2xl bg-pink-950/30 border border-pink-400/10 hover:scale-105 transition">
-              <svg viewBox="0 0 120 120" class="w-full h-full filter drop-shadow-md">
-                <!-- Ears -->
-                <circle cx="35" cy="30" r="14" fill="#a46d51"/>
-                <circle cx="35" cy="30" r="8" fill="#e2a688"/>
-                <circle cx="85" cy="30" r="14" fill="#a46d51"/>
-                <circle cx="85" cy="30" r="8" fill="#e2a688"/>
-                
-                <!-- Body -->
-                <ellipse cx="60" cy="78" rx="30" ry="26" fill="#a46d51"/>
-                <ellipse cx="60" cy="80" rx="20" ry="17" fill="#c78c6e"/>
-                
-                <!-- Head -->
-                <circle id="bearHead" cx="60" cy="50" r="26" fill="#b87a5a" class="bear-head"/>
-                <!-- Snout -->
-                <ellipse cx="60" cy="56" rx="13" ry="9" fill="#f1caa9"/>
-                <ellipse cx="60" cy="53" rx="5" ry="3.5" fill="#381d11"/>
-                <!-- Eyes (Gentle Sad to Hopeful) -->
-                <circle id="eyeL" cx="50" cy="46" r="3.5" fill="#23130c"/>
-                <circle id="eyeR" cx="70" cy="46" r="3.5" fill="#23130c"/>
-                <!-- Cute light sparkle in eyes -->
-                <circle cx="51" cy="45" r="1.2" fill="#ffffff"/>
-                <circle cx="71" cy="45" r="1.2" fill="#ffffff"/>
-                <!-- Gentle apologetic mouth -->
-                <path id="bearMouth" d="M 57 60 Q 60 58 63 60" stroke="#381d11" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-                
-                <!-- Cheeks Blush -->
-                <circle cx="45" cy="54" r="4.5" fill="#ff708f" opacity="0.5"/>
-                <circle cx="75" cy="54" r="4.5" fill="#ff708f" opacity="0.5"/>
-                
-                <!-- Arms holding Heart -->
-                <path id="bearArmL" class="bear-arm-left" d="M 34 68 Q 45 74 54 78" stroke="#a46d51" stroke-width="9" stroke-linecap="round" fill="none"/>
-                <path id="bearArmR" class="bear-arm-right" d="M 86 68 Q 75 74 66 78" stroke="#a46d51" stroke-width="9" stroke-linecap="round" fill="none"/>
+      setTimeout(() => {
+        document.getElementById('stage1').style.display = 'none';
+        const s2 = document.getElementById('stage2');
+        s2.style.display = 'block';
+        setTimeout(() => { s2.style.opacity = '1'; }, 50);
+      }, 700);
+    }
 
-                <!-- Red/Pink Heart in Paws -->
-                <path d="M 60 82 C 54 74, 46 76, 46 84 C 46 91, 56 97, 60 101 C 64 97, 74 91, 74 84 C 74 76, 66 74, 60 82 Z" fill="#e63946" stroke="#fff" stroke-width="1.5"/>
-                <text x="60" y="89" font-size="5" text-anchor="middle" fill="#fff" font-weight="bold" font-family="sans-serif">Teena</text>
-              </svg>
-            </div>
+    /* Confetti Particle Burst */
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#f3c677', '#f28b9f', '#ffffff']
+        });
+      }
+    }
 
-            <!-- Teddy Message popup -->
-            <div id="teddyStatus" class="mt-4 text-xs font-hand text-pink-200 text-base h-6">
-              "Pwease tap me... I'm holding all your tears away"
-            </div>
+    /* Modal Navigation */
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
 
-            <button onclick="hugTeddy()" class="mt-3 px-4 py-1.5 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-400/30 text-pink-200 text-xs font-semibold tracking-wide transition flex items-center gap-1.5">
-              <i class="fa-solid fa-heart text-pink-400"></i> Tap For Soft Cuddle
-            </button>
-          </div>
+    /* Squeeze Bear Action */
+    function squeezeBear() {
+      const bear = document.getElementById('bearEmoji');
+      bear.textContent = "🥰";
+      triggerConfetti();
+      setTimeout(() => { bear.textContent = "🧸"; }, 1500);
+    }
 
-          <!-- GIFT 2: The Unfolding Letter Modal trigger -->
-          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
-            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-pink-300 bg-pink-400/10 px-2.5 py-1 rounded-full border border-pink-300/20">Gift #2</div>
+    /* Interactive Reasons Cycling */
+    const reasons = [
+      "Aapki ek smile mere poore din ka sukoon hai, aur aapko rulaana meri sabse badi haar.",
+      "Aapne hamesha mera saath diya, jabki mujhe aapko protect aur support karna chahiye tha.",
+      "Aap meri life ka wo hissa hain jise main kisi bhi keemat par khona nahi chahta.",
+      "Aapki izzat aur aapka dhyan rakhna meri sabse pehli zimmedari hai."
+    ];
+    let rIdx = 0;
+    function cyclePriority() {
+      rIdx = (rIdx + 1) % reasons.length;
+      document.getElementById('priorityCardContent').textContent = `"${reasons[rIdx]}"`;
+    }
 
-            <div>
-              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
-                <span>💌</span> Unfold My Heartfelt Letter
-              </h3>
-              <p class="text-xs text-pink-200/70 mb-4">No excuses, no comparisons. Sirf dil se nikli sacchi maafi.</p>
-            </div>
+    /* Gussa Meter Responses */
+    function updateGussa(val) {
+      document.getElementById('sliderVal').textContent = val + "%";
+      const msg = document.getElementById('reactionMsg');
+      if (val > 80) {
+        msg.textContent = '"Aapka 100% naraz hona bilkul lazmi hai... Main tab tak intazar karunga jab tak aap theek na hon."';
+      } else if (val > 40) {
+        msg.textContent = '"Gussa thoda kam hua, lekin main jaanta hoon abhi bhi dil dukha hai. I am here for you."';
+      } else if (val > 0) {
+        msg.textContent = '"Ek choti si muskan bhi mere liye duniya barabar hai. Thank you for listening to me."';
+      } else {
+        msg.textContent = '"Agar 0% par aa gaye hain, toh please mujhe ek baar call karke meri awaaz sun lijiye ❤️"';
+        triggerConfetti();
+      }
+    }
 
-            <!-- Animated Envelope Graphic -->
-            <div onclick="openLetterModal()" class="cursor-pointer relative w-36 h-28 my-2 rounded-xl bg-gradient-to-br from-[#8a2542] to-[#451221] border border-pink-300/40 flex items-center justify-center shadow-lg group-hover:scale-105 transition transform">
-              <div class="w-12 h-12 rounded-full bg-amber-300/20 border border-amber-300/50 flex items-center justify-center text-amber-200 text-xl shadow">
-                <i class="fa-solid fa-envelope-open-text"></i>
-              </div>
-              <span class="absolute bottom-2 text-[11px] font-hand text-pink-200">Tap to Read</span>
-            </div>
+    /* Web Audio API Synthesizer (No external sound files required) */
+    let audioCtx = null;
+    let isPlaying = false;
+    let timer = null;
 
-            <button onclick="openLetterModal()" class="btn-magic w-full py-2.5 rounded-2xl text-xs font-bold tracking-wider uppercase transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-book-open"></i> Read Every Word
-            </button>
-          </div>
+    function playSoftTune() {
+      if (isPlaying) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        isPlaying = true;
+        document.getElementById('audioLabel').textContent = "Melody Playing 🎶";
 
-          <!-- GIFT 3: Reasons You Are Priority #1 (Interactive Cards) -->
-          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
-            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-emerald-300 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-300/20">Gift #3</div>
+        const notes = [261.63, 329.63, 392.00, 440.00, 392.00, 329.63]; // C - E - G - A - G - E
+        let i = 0;
 
-            <div>
-              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
-                <span>🌸</span> Why You're My Priority #1
-              </h3>
-              <p class="text-xs text-pink-200/70 mb-3">Card par click karke dekhiye aap mere liye kitni anmol hain</p>
-            </div>
+        function playNote() {
+          if (!isPlaying) return;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(notes[i % notes.length], audioCtx.currentTime);
 
-            <!-- Flipped / Cycling Reason Card -->
-            <div onclick="nextReasonCard()" id="reasonCardBox" class="cursor-pointer w-full min-h-[110px] bg-pink-900/30 border border-pink-400/20 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner transition duration-300 hover:bg-pink-900/40">
-              <span id="reasonNumber" class="text-[10px] text-amber-300 font-bold uppercase tracking-wider mb-1">Reason 1 of 5</span>
-              <p id="reasonText" class="text-xs sm:text-sm font-hand text-pink-100 text-lg leading-snug">
-                "Aapki ek muskaan mere poore din ki thakan aur pareshani mita deti hai. Aap sirf partner nahi, meri shanti hain."
-              </p>
-              <span class="text-[10px] text-pink-400/60 mt-2">Tap for next sweet truth ➜</span>
-            </div>
-
-            <button onclick="nextReasonCard()" class="mt-3 px-5 py-2 rounded-full bg-pink-500/20 hover:bg-pink-500/30 border border-pink-400/30 text-pink-200 text-xs font-semibold tracking-wide transition flex items-center gap-1.5">
-              <span>Next Card</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </button>
-          </div>
-
-          <!-- GIFT 4: The Endless Pampering Voucher -->
-          <div class="bg-[rgba(36,17,28,0.7)] backdrop-blur-xl border border-pink-300/20 rounded-3xl p-6 shadow-xl flex flex-col justify-between items-center text-center relative overflow-hidden group hover:border-pink-300/40 transition">
-            <div class="absolute top-3 right-4 text-[10px] uppercase font-bold tracking-widest text-purple-300 bg-purple-400/10 px-2.5 py-1 rounded-full border border-purple-300/20">Gift #4</div>
-
-            <div>
-              <h3 class="text-lg font-bold text-white mb-1 flex items-center justify-center gap-2">
-                <span>☕</span> Teena Ji's Royal Lifetime Pass
-              </h3>
-              <p class="text-xs text-pink-200/70 mb-3">Ye official coupon redeemable hai kabhi bhi, kitni bhi baar!</p>
-            </div>
-
-            <!-- Stylized Coupon Ticket -->
-            <div class="w-full bg-gradient-to-r from-amber-200/10 via-pink-300/15 to-amber-200/10 border-2 border-dashed border-amber-300/40 rounded-2xl p-4 text-left relative">
-              <div class="flex justify-between items-center border-b border-amber-300/20 pb-2 mb-2">
-                <span class="text-[11px] font-bold tracking-wider text-amber-200 uppercase">Golden Voucher #001</span>
-                <span class="text-[10px] bg-amber-400/20 text-amber-200 px-2 py-0.5 rounded-full">Non-Expiring</span>
-              </div>
-              <ul class="text-[11px] sm:text-xs text-pink-100/90 space-y-1.5 list-disc list-inside font-light">
-                <li><strong class="text-amber-200 font-medium">Unlimited Chai & Fav Treats</strong> on demand.</li>
-                <li><strong class="text-amber-200 font-medium">100% Patient Listening</strong> bina kisi argument ke.</li>
-                <li><strong class="text-amber-200 font-medium">Teena Ji Chosen 1st</strong> har din, har pal.</li>
-              </ul>
-            </div>
-
-            <button onclick="claimVoucher(this)" class="mt-3 px-5 py-2 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-amber-200 text-xs font-semibold tracking-wide transition flex items-center gap-2">
-              <i class="fa-solid fa-stamp"></i> Claim My Forever Rights
-            </button>
-          </div>
-
-       
+          gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          
